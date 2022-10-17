@@ -59,7 +59,7 @@ while True:
         if now > end_time - datetime.timedelta(seconds=10) and wasSold != 1:
             btc = get_balance("SOL")
             if btc > 0.00008:
-                upbit.sell_market_order("KRW-BTC", btc*0.9995)
+                upbit.sell_market_order("KRW-SOL", btc*0.9995)
                 time.sleep(1)
     except Exception as e:
         print(e)
