@@ -53,13 +53,14 @@ while True:
                 upbit.buy_market_order("KRW-SOL", krw*0.9995)
                 wasSold = 0
         # 파는 타이밍: 5프로 손해 또는 시간 끝
+        sol = get_balance("SOL")
         if current_price <= target_price * 0.95:
-            upbit.sell_market_order("KRW-SOL", btc * 0.9995)
+            upbit.sell_market_order("KRW-SOL", sol * 0.9995)
             wasSold = 1
         if now > end_time - datetime.timedelta(seconds=10) and wasSold != 1:
-            btc = get_balance("SOL")
-            if btc > 0.00008:
-                upbit.sell_market_order("KRW-SOL", btc*0.9995)
+            sol = get_balance("SOL")
+            if sol > 0.00008:
+                upbit.sell_market_order("KRW-SOL", sol*0.9995)
                 time.sleep(1)
     except Exception as e:
         print(e)
