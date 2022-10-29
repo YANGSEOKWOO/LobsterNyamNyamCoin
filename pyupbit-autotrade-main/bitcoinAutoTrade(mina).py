@@ -2,14 +2,16 @@ import time
 import pyupbit
 import datetime
 
-access = "your-access"
-secret = "your-secret"
+access = "v6JlrnjNHQnxPZsmt7iqlhLsITaB1g4ywSAYpOVg"
+secret = "fau8HNUewWHKXDiFDSTPdiSf1GlOdUi0CVunT8Sn"
 
 #def get_target_price(ticker, k):
-    """변동성 돌파 전략으로 매수 목표가 조회"""
+#   """변동성 돌파 전략으로 매수 목표가 조회"""
 #    df = pyupbit.get_ohlcv(ticker, interval="day", count=2)
 #    target_price = df.iloc[0]['close'] + (df.iloc[0]['high'] - df.iloc[0]['low']) * k
 #    return target_price
+
+
 
 def get_start_time(ticker):
     """시작 시간 조회"""
@@ -28,19 +30,24 @@ def get_balance(ticker):
                 return 0
     return 0
 
-def get_current_price(ticker):
-    """현재가 조회"""
-    return pyupbit.get_orderbook(ticker=ticker)["orderbook_units"][0]["ask_price"]
 
-
- def get_yesterday_ma3(ticker):
+def get_yesterday_ma3(ticker):
     """(3일)전일 이동평균"""
     df = pybithumb.get_ohlcv(ticker)
     close = df['close']
     ma = close.rolling(3).mean()
     return ma[-2]
 
-target_price = get_yesterday_ma3("KRW-BTC") "전일이동평균 = 목표가"
+
+
+def get_current_price(ticker):
+    """현재가 조회"""
+    return pyupbit.get_orderbook(ticker=ticker)["orderbook_units"][0]["ask_price"]
+
+
+target_price = get_yesterday_ma3("KRW-BTC") #"전일이동평균 = 목표가"
+
+
 
 
 # 로그인
@@ -51,21 +58,21 @@ print("autotrade start")
 while True:
     try:
         now = datetime.datetime.now()
-        start_time = get_start_time("KRW-BTC")
+        start_time = get_start_time("KRW-SOL")
         end_time = start_time + datetime.timedelta(days=1)
 
         if start_time < now < end_time - datetime.timedelta(seconds=10):
-            target_price = get_yesterday_ma3("KRW-BTC")
-            current_price = get_current_price("KRW-BTC")
+            target_price = get_yesterday_ma3("KRW-SOL")
+            current_price = get_current_price("KRW-SOL")
            
             if target_price < current_price:
                 krw = get_balance("KRW")
                 if krw > 5000:
-                    upbit.buy_market_order("KRW-BTC", krw*0.9995)
+                    upbit.buy_market_order("KRW-SOL", krw*0.9995)
         else:
-            btc = get_balance("BTC")
-            if btc > 0.00008:
-                upbit.sell_market_order("KRW-BTC", btc*0.9995)
+            sol = get_balance("BTC")
+            if sol > 0.00008:
+                upbit.sell_market_order("KRW-SOL", sol*0.9995)
         time.sleep(1)
     except Exception as e:
         print(e)
