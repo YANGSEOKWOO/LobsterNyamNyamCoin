@@ -1,6 +1,7 @@
 import time
 import pyupbit
 import datetime
+import pybithumb
 
 access = "v6JlrnjNHQnxPZsmt7iqlhLsITaB1g4ywSAYpOVg"
 secret = "fau8HNUewWHKXDiFDSTPdiSf1GlOdUi0CVunT8Sn"
@@ -45,7 +46,7 @@ def get_current_price(ticker):
     return pyupbit.get_orderbook(ticker=ticker)["orderbook_units"][0]["ask_price"]
 
 
-target_price = get_yesterday_ma3("KRW-BTC") #"전일이동평균 = 목표가"
+target_price = get_yesterday_ma3("KRW-SOL") #"전일이동평균 = 목표가"
 
 
 
