@@ -8,7 +8,7 @@ secret = "fau8HNUewWHKXDiFDSTPdiSf1GlOdUi0CVunT8Sn"
 
 #def get_target_price(ticker, k):
 #   """변동성 돌파 전략으로 매수 목표가 조회"""
-#    df = pyupbit.get_ohlcv(ticker, interval="day", count=2)
+#df = pyupbit.get_ohlcv(ticker, interval="day", count=2)
 #    target_price = df.iloc[0]['close'] + (df.iloc[0]['high'] - df.iloc[0]['low']) * k
 #    return target_price
 
@@ -35,6 +35,7 @@ def get_balance(ticker):
 def get_yesterday_ma3(ticker):
     """(3일)전일 이동평균"""
     df = pybithumb.get_ohlcv(ticker)
+    df = pyupbit.get_ohlcv(ticker, interval="day", count=2)
     close = df['close']
     ma = close.rolling(3).mean()
     return ma[-2]
