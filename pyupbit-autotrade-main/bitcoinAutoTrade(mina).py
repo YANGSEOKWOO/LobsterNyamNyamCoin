@@ -76,15 +76,13 @@ while True:
             sol = get_balance("SOL")
             if sol > 0.00008:
                 upbit.sell_market_order("KRW-SOL", sol*0.9995)
-                
-        time.sleep(1)
+        
         all = pybithumb.get_current_price("SOL") 
         if all is None: 	
             break 
         current_price = pybithumb.get_current_price(target_price)
         if current_price is None: 	
             break
-
 
     except Exception as e:
         print(e)
